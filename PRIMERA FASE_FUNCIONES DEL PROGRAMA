@@ -2,6 +2,14 @@ A CONTINUACIÓN VAMOS A DEFINIR LAS FUNCIONES QUE SE UTILIZARÁN EN EL MENÚ PRI
 
 #PRIMER FUNCION A DEFINIR: MOSTRAR REGISTROS. TODOS O ESCRIBA CÉDULA.
 #DIAGRAMA: MOSTRAR REGISTROS>NOTAS, ESTUDIANTES O ASISTENCIA>TODO O COLOQUE NOMBRE O CEDULA
+------------------------------------------
+
+def encontrar_fila(parametro1, df):
+    for index, row in df.iterrows():
+        if parametro1 in row.values:
+            return row
+    return None
+------------------------------------------
 
 def mostrar_registros():
     print("---- ESTUDIANTES DE HD----")
@@ -19,7 +27,7 @@ def mostrar_registros():
             print(TABLA1)
         elif opcion2 == "2":
             
-            valor_buscado = input("Ingrese el nombre o la cédula a buscar: ")
+            valor_buscado = input(str("Ingrese el nombre o la cédula a buscar: "))
             fila_encontrada = encontrar_fila(valor_buscado, TABLA1)
             
             if fila_encontrada is not None:
@@ -28,19 +36,38 @@ def mostrar_registros():
                 print("No se encontró ninguna fila con ese valor.")
                 
     elif opcion == "2":
-        print(TABLA2)
+        print("presione 1: para mostrar toda la tabla")
+        print("presione 2: ingrese nombre o cédula")
+        opcion2 = input("ingrese la opción deseada")
+        if opcion2 == "1": 
+            print(TABLA2)
+        elif opcion2 == "2":
+            
+            valor_buscado = input(str("Ingrese el nombre"))
+            fila_encontrada = encontrar_fila(valor_buscado, TABLA2)
+            
+            if fila_encontrada is not None:
+                print(fila_encontrada)
+            else:
+                print("No se encontró ninguna fila con ese valor.")
+            
     elif opcion == "3":
-        print(TABLA3)
+        print("presione 1: para mostrar toda la tabla")
+        print("presione 2: ingrese nombre o cédula")
+        opcion2 = input("ingrese la opción deseada")
+        if opcion2 == "1": 
+            print(TABLA3)
+        elif opcion2 == "2":
+            
+            valor_buscado = input(str("Ingrese el nombre"))
+            fila_encontrada = encontrar_fila(valor_buscado, TABLA3)
+            
+            if fila_encontrada is not None:
+                print(fila_encontrada)
+            else:
+                print("No se encontró ninguna fila con ese valor.")
     else:
         print("Opción inválida. Por favor, ingrese una opción válida.")
-        
-  #definiendo funcion dentro de la funcion mostrar_Registros(). Funcion para buscar fila
-def encontrar_fila(parametro1, df):
-    for row in df:
-        if parametro1 in row:
-            return row
-    return None
-
         
 #SEGUNDA FUNCIÓN: AGREGAR REGISTROS>NOTAS, ESTUDIANTES O ASISTENCIA>AGREGUE REGISTROS
         #print("Todos o ingresé cédula") restringir a solo numeros. Configurar // regex // ajustar para duplicar, que la tabla no tenga duplicados. 
