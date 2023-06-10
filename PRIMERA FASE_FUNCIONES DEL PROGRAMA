@@ -69,6 +69,24 @@ def mostrar_registros():
     else:
         print("Opción inválida. Por favor, ingrese una opción válida.")
         
-#SEGUNDA FUNCIÓN: AGREGAR REGISTROS>NOTAS, ESTUDIANTES O ASISTENCIA>AGREGUE REGISTROS
-        #print("Todos o ingresé cédula") restringir a solo numeros. Configurar // regex // ajustar para duplicar, que la tabla no tenga duplicados. 
-        ##input("ingrese cédula") #crear 2 nuevas funciones (ver ultimo chatgpt)
+#SEGUNDA FUNCIÓN: AGREGAR REGISTROS
+
+def agregar_datos(df):
+    identificador = input("Ingrese el nombre: ")
+    columna = input("Campo a modificar:")
+    datos = input("Ingrese los datos: ")
+
+    # Convertir los datos ingresados en una lista
+    dato_convertido = float(datos.strip())
+
+    # Obtener el índice de la fila que coincide con el nombre o la cédula proporcionada
+    filtro = (df['Nombre'] == identificador) ##al colocar identificador (nombre), lo busca en la columna nombre. Es lo que realiza este filtro
+    indice_fila = df.index[filtro].tolist()[0] 
+
+    # Actualizar los datos en la columna seleccionada
+    df.at[indice_fila, columna] = dato_convertido ##aqui el DF.AT para acceder a una celda especifica y añadir el nuevo datos. DF.AT Se necesitan 
+    ##2 parametros para identificar la celda (indice y cnombre de columna)
+
+    return df
+
+        
