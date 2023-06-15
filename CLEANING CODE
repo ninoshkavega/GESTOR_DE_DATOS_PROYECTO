@@ -1,0 +1,63 @@
+def encontrar_fila(valor_buscado, df):
+    # Aquí va la lógica para encontrar la fila en el DataFrame
+    pass
+
+def mostrar_registros():
+    print("---- ESTUDIANTES DE HD----")
+    print("1. Mostrar Registros de la tabla ESTUDIANTES")
+    print("2. Mostrar Registros de la tabla ASISTENCIA")
+    print("3. Mostrar Registros de la tabla NOTAS")
+
+    opcion = input("Ingrese el número de la opción deseada: ")
+
+    if opcion == "1":
+        print("Presione 1 para mostrar toda la tabla.")
+        print("Presione 2 e ingrese nombre o cédula.")
+        opcion2 = input("Ingrese la opción deseada: ")
+        
+        if opcion2 == "1":
+            print("TABLA1")
+        elif opcion2 == "2":
+            valor_buscado = input("Ingrese el nombre o la cédula a buscar: ")
+            fila_encontrada = encontrar_fila("valor_buscado, TABLA1")
+            
+            if fila_encontrada is not None:
+                print(fila_encontrada)
+            else:
+                print("No se encontró ninguna fila con ese valor.")
+                
+    elif opcion == "2":
+        print("Presione 1 para mostrar toda la tabla.")
+        print("Presione 2 e ingrese nombre o cédula.")
+        opcion2 = input("Ingrese la opción deseada: ")
+        
+        if opcion2 == "1":
+            print("TABLA2")
+        elif opcion2 == "2":
+            valor_buscado = input("Ingrese el nombre: ")
+            fila_encontrada = encontrar_fila("valor_buscado, TABLA2")
+            
+            if fila_encontrada is not None:
+                print(fila_encontrada)
+            else:
+                print("No se encontró ninguna fila con ese valor.")
+            
+    elif opcion == "3":
+        print("Presione 1 para mostrar toda la tabla.")
+        print("Presione 2 e ingrese nombre o cédula.")
+        opcion2 = input("Ingrese la opción deseada: ")
+        
+        if opcion2 == "1":
+            print("TABLA3")
+        elif opcion2 == "2":
+            valor_buscado = input("Ingrese el nombre: ")
+            fila_encontrada = encontrar_fila("valor_buscado, TABLA3")
+            
+            if fila_encontrada is not None:
+                print(fila_encontrada)
+            else:
+                print("No se encontró ninguna fila con ese valor.")
+            
+    else:
+        print("Opción inválida. Por favor, ingrese una opción válida.")
+mostrar_registros()
