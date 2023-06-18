@@ -74,19 +74,21 @@ def mostrar_registros():
 def agregar_datos(df):
     identificador = input("Ingrese el nombre: ")
     columna = input("Campo a modificar:")
-    datos = input("Ingrese los datos: ")
+    datos = input("Ingrese nuevo dato: ")
 
     # Convertir los datos ingresados en una lista
     dato_convertido = float(datos.strip())
+    
+    # Verificar si la columna existe en el DataFrame
+    if columna not in df.columns:
+        nombre_columna = input("La columna no existe. Ingrese un nombre para la nueva columna: ")
+        df[nombre_columna] = None
 
     # Obtener el índice de la fila que coincide con el nombre o la cédula proporcionada
-    filtro = (df['Nombre'] == identificador) ##al colocar identificador (nombre), lo busca en la columna nombre. Es lo que realiza este filtro
-    indice_fila = df.index[filtro].tolist()[0] 
+    filtro = (df['Nombre'] == identificador)
+    indice_fila = df.index[filtro].tolist()[0]
 
     # Actualizar los datos en la columna seleccionada
-    df.at[indice_fila, columna] = dato_convertido ##aqui el DF.AT para acceder a una celda especifica y añadir el nuevo datos. DF.AT Se necesitan 
-    ##2 parametros para identificar la celda (indice y cnombre de columna)
+    df.at[indice_fila, columna] = dato_convertido
 
     return df
-
-        
