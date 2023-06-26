@@ -71,24 +71,54 @@ def mostrar_registros():
         
 #SEGUNDA FUNCIÓN: AGREGAR REGISTROS
 
-def agregar_datos(df):
-    identificador = input("Ingrese el nombre: ")
-    columna = input("Campo a modificar:")
-    datos = input("Ingrese nuevo dato: ")
+ def agregar_datos2(df):
+    identificador = input("Ingrese el nombre: ") #solo acepta nombre
+    columna = input("Campo a modificar:") #la columna debe estar escrita idéntica
+    datos = input("Ingrese los datos : ")
 
     # Convertir los datos ingresados en una lista
     dato_convertido = float(datos.strip())
     
     # Verificar si la columna existe en el DataFrame
     if columna not in df.columns:
-        nombre_columna = input("La columna no existe. Ingrese un nombre para la nueva columna: ")
-        df[nombre_columna] = None
+        columna = input("La columna no existe. Ingrese un nombre para la nueva columna: ")
+        df[columna] = None
+        
 
     # Obtener el índice de la fila que coincide con el nombre o la cédula proporcionada
-    filtro = (df['Nombre'] == identificador)
-    indice_fila = df.index[filtro].tolist()[0]
+    indice_fila = df.index.get_loc(identificador)
 
     # Actualizar los datos en la columna seleccionada
-    df.at[indice_fila, columna] = dato_convertido
-
+    df.loc[identificador, columna] = dato_convertido
+        
     return df
+
+#3ERA FUNCION PASAR_LISTA()
+
+def pasar_asistencia(ASISTENCIA1):
+    fecha = input("Ingrese la fecha (formato AAAA-MM-DD): ")
+    if fecha not in ASISTENCIA1.index:
+        print("Fecha inválida.")
+        return
+    print('1: PRESENTE, 0:AUSENTE')
+    
+    for nombre in ASISTENCIA1.columns:
+        while True:
+            asistencia_input = input(f"Ingrese '0' o '1' {nombre} ")
+            if asistencia_input == '0' or asistencia_input == '1':
+                break
+            else:
+                print("Opción inválida. Intente nuevamente.")
+        
+        ASISTENCIA1.loc[fecha, nombre] = int(asistencia_input)
+    
+    print(f"Asistencia registrada para la fecha {fecha}.")
+    # Guardar el DataFrame actualizado en un archivo o realizar otras operaciones necesarias
+
+# Ejemplo de uso de la función
+pasar_asistencia(ASISTENCIA1)
+
+# Muestra el DataFrame actualizado con la asistencia registrada
+print(ASISTENCIA1)
+
+
