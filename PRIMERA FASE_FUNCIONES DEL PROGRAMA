@@ -10,8 +10,17 @@ def encontrar_fila(parametro1, df):
             return row
     return None
 ------------------------------------------
+def encontrar_columna1(parametro1, df):
+    if parametro1 in df.columns:
+        columna = df[[parametro1]].copy()
+        return columna
+    elif parametro1 in df.index:
+        fila = df.loc[[parametro1]].copy()
+        return fila
+    return None
+---------------------------------------------------
 
-def mostrar_registros():
+def mostrar_registros2():
     print("---- ESTUDIANTES DE HD----")
     print("1. Mostrar Registros de la tabla ESTUDIANTES")
     print("2. Mostrar Registros de la tabla ASISTENCIA")
@@ -40,16 +49,16 @@ def mostrar_registros():
         print("presione 2: ingrese nombre o cédula")
         opcion2 = input("ingrese la opción deseada")
         if opcion2 == "1": 
-            print(TABLA2)
+            print(ASISTENCIA1)
         elif opcion2 == "2":
             
-            valor_buscado = input(str("Ingrese el nombre"))
-            fila_encontrada = encontrar_fila(valor_buscado, TABLA2)
+            valor_buscado = input("Ingrese el nombre")
+            columna_encontrada = encontrar_columna1(valor_buscado, ASISTENCIA1)
             
-            if fila_encontrada is not None:
-                print(fila_encontrada)
+            if columna_encontrada is not None:
+                print(columna_encontrada)
             else:
-                print("No se encontró ninguna fila con ese valor.")
+                print("No se encontró coincidencia")
             
     elif opcion == "3":
         print("presione 1: para mostrar toda la tabla")
@@ -60,13 +69,13 @@ def mostrar_registros():
         elif opcion2 == "2":
             
             valor_buscado = input(str("Ingrese el nombre"))
-            fila_encontrada = encontrar_fila(valor_buscado, TABLA3)
+            columna_encontrada = encontrar_columna1(valor_buscado, TABLA3)
             
-            if fila_encontrada is not None:
-                print(fila_encontrada)
+            if columna_encontrada is not None:
+                print(columna_encontrada)
             else:
-                print("No se encontró ninguna fila con ese valor.")
-    else:
+                print("No hay coincidencia")
+                
         print("Opción inválida. Por favor, ingrese una opción válida.")
         
 #SEGUNDA FUNCIÓN: AGREGAR REGISTROS
