@@ -3,12 +3,13 @@ A CONTINUACIÓN VAMOS A DEFINIR LAS FUNCIONES QUE SE UTILIZARÁN EN EL MENÚ PRI
 #PRIMER FUNCION A DEFINIR: MOSTRAR REGISTROS. TODOS O ESCRIBA CÉDULA.
 #DIAGRAMA: MOSTRAR REGISTROS>NOTAS, ESTUDIANTES O ASISTENCIA>TODO O COLOQUE NOMBRE O CEDULA
 ------------------------------------------
-
-def encontrar_fila(parametro1, df):
-    for index, row in df.iterrows():
-        if parametro1 in row.values:
-            return row
-    return None
+def encontrar_registro(df, indice):
+    try:
+        registro = df.loc[indice]
+        return registro
+    except KeyError:
+        print("No se encontró ningún registro con ese índice.")
+        return None
 ------------------------------------------
 def encontrar_columna1(parametro1, df):
     if parametro1 in df.columns:
@@ -18,6 +19,7 @@ def encontrar_columna1(parametro1, df):
         fila = df.loc[[parametro1]].copy()
         return fila
     return None
+
 ---------------------------------------------------
 
 def mostrar_registros2():
@@ -80,28 +82,63 @@ def mostrar_registros2():
         
 #SEGUNDA FUNCIÓN: AGREGAR REGISTROS
 
- def agregar_datos2(df):
-    identificador = input("Ingrese el nombre: ") #solo acepta nombre
-    columna = input("Campo a modificar:") #la columna debe estar escrita idéntica
-    datos = input("Ingrese los datos : ")
+ def mostrar_registros():
+    print("---- ESTUDIANTES DE HD----")
+    print("1. Mostrar Registros de la tabla ESTUDIANTES")
+    print("2. Mostrar Registros de la tabla ASISTENCIA")
+    print("3. Mostrar Registros de la tabla NOTAS")
 
-    # Convertir los datos ingresados en una lista
-    dato_convertido = float(datos.strip())
-    
-    # Verificar si la columna existe en el DataFrame
-    if columna not in df.columns:
-        columna = input("La columna no existe. Ingrese un nombre para la nueva columna: ")
-        df[columna] = None
+    opcion = input("Ingrese el número de la opción deseada: ")
+
+    if opcion == "1":
+        print("presione 1: para mostrar toda la tabla")
+        print("presione 2: ingrese nombre o cédula")
+        opcion2 = input("ingrese la opción deseada")
+        if opcion2 == "1": 
+            print(ESTUDIANTES)
+        elif opcion2 == "2":
+            
+            valor_buscado = input(str("Ingrese el nombre"))
+            columna_encontrada = encontrar_columna(valor_buscado, ESTUDIANTES)
+            
+            if columna_encontrada is not None:
+                print(columna_encontrada)
+            else:
+                print("No hay coincidencia")
+                
+    elif opcion == "2":
+        print("presione 1: para mostrar toda la tabla")
+        print("presione 2: ingrese nombre")
+        opcion2 = input("ingrese la opción deseada")
+        if opcion2 == "1": 
+            print(ASISTENCIA2)
+        elif opcion2 == "2":
+            
+            valor_buscado = str(input("Ingrese el nombre"))
+            registro_encontrado = encontrar_registro(ASISTENCIA2, valor_buscado)
+            
+            if registro_encontrado is not None:
+                print(registro_encontrado)
+            else:
+                print("No se encontró coincidencia")
+            
+    elif opcion == "3":
+        print("presione 1: para mostrar toda la tabla")
+        print("presione 2: ingrese nombre")
+        opcion2 = input("ingrese la opción deseada")
+        if opcion2 == "1": 
+            print(NOTA)
+        elif opcion2 == "2":
+            
+            valor_buscado = input(str("Ingrese el nombre"))
+            columna_encontrada = encontrar_columna(valor_buscado, NOTA)
+            
+            if columna_encontrada is not None:
+                print(columna_encontrada)
+            else:
+                print("No hay coincidencia")
+                
         
-
-    # Obtener el índice de la fila que coincide con el nombre o la cédula proporcionada
-    indice_fila = df.index.get_loc(identificador)
-
-    # Actualizar los datos en la columna seleccionada
-    df.loc[identificador, columna] = dato_convertido
-        
-    return df
-
 #3ERA FUNCION PASAR_LISTA()
 
 def pasar_asistencia(ASISTENCIA1):
